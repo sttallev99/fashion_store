@@ -35,6 +35,7 @@ const Title = styled.h1`
 
 const Description = styled.p`
     margin: 20px 0;
+    width: 80%;
 `; 
 
 const Price = styled.span`
