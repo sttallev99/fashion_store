@@ -18,6 +18,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     height: 50%;
+    width: 40%;
     margin: auto 0;
     margin-left: 50px;
     padding: 20px;
@@ -34,17 +35,18 @@ const Title = styled.h1`
 const Form = styled.form`
     display: flex;
     flex-direction: column;
+    width: 70%;
 `;
 
 const Input = styled.input`
     margin-bottom: 10px;
-    width: 70%;
     padding: 10px;
+    outline: none;
+    border: none;
 `;
 
 const Agreement = styled.div`
     margin-top: 10px;
-    width: 70%;
     margin-bottom: 20px;
 `;
 
