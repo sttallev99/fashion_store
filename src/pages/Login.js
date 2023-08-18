@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     background-color: teal;
     display: flex;
     flex-direction: column;
-    height: 50%;
+    height: 35%;
     width: 40%;
     margin: auto 0;
     margin-left: 50px;
@@ -60,6 +60,7 @@ const Link = styled.a`
     color: white;
     font-weight: 300;
     cursor: pointer;
+    text-decoration: underline;
 `;
 
 const Login = () => {
