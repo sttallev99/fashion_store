@@ -1,6 +1,8 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
+import { mobile } from '../responsive'
+
 const Container = styled.div`
     width: 100vw;
     height: 100vh;
@@ -23,6 +25,7 @@ const Wrapper = styled.div`
     margin-left: 50px;
     padding: 20px;
     border-radius: 10px;
+    ${mobile({ width: '100%', margin:  'auto 20px', height: '50%', alignItems: 'center' })}
 `;
 
 const Title = styled.h1`
@@ -61,6 +64,7 @@ const Link = styled.a`
     font-weight: 300;
     cursor: pointer;
     text-decoration: underline;
+    ${mobile({ textAlign: ' left'})}
 `;
 
 const Login = () => {
@@ -72,9 +76,9 @@ const Login = () => {
             <Input placeholder="username" />
             <Input placeholder="password" />
             <Button>LOGIN</Button>
-            <Link>Do not remember the password?</Link>
-            <Link>Create New Account</Link>
         </Form>
+        <Link>Do not remember the password?</Link>
+        <Link>Create New Account</Link>
         </Wrapper>
     </Container>
   )

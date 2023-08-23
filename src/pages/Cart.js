@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Add } from '@mui/icons-material';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
 
@@ -13,7 +14,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
     padding: 20px;
-    height: 90vh;
+    ${mobile({padding: '10px'})}
 `;
 
 const Title = styled.h1`
@@ -39,7 +40,7 @@ const TopButton = styled.button`
 
 
 const TopTexts = styled.div`
-    
+    ${mobile({ display: 'none'})}
 `;
 
 const TopText = styled.span`
@@ -51,6 +52,7 @@ const TopText = styled.span`
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
+    ${mobile({flexDirection: 'column'})}
 `;
 
 const Info = styled.div`
@@ -61,6 +63,7 @@ const Product = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
+    ${mobile({flexDirection: 'column', alignItems: 'center'})}
 `;
 
 const ProductDetails = styled.div`
@@ -70,6 +73,7 @@ const ProductDetails = styled.div`
 
 const Image = styled.img`
     width: 250px;
+    ${mobile({width: '200px', height: '200px', objectFit: 'cover'})}
 `;
 
 const Details = styled.div`

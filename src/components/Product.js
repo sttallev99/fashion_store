@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { mobile } from '../responsive';
 
 const Info = styled.div`
     opacity: 0;
@@ -34,6 +35,8 @@ const Container = styled.div`
     &:hover ${Info} {
         opacity: 1
     }
+
+    ${mobile({margin: '15px 20px', minWidth: 'auto'})}
 `;
 
 
