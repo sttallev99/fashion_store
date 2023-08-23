@@ -25,6 +25,7 @@ const Wrapper = styled.div`
     margin-left: 50px;
     padding: 20px;
     border-radius: 10px;
+    align-items: center;
     ${mobile({ width: '100%', margin:  'auto 20px', height: '50%', alignItems: 'center' })}
 `;
 
