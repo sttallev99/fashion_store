@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -7,9 +7,11 @@ import Announcement from '../components/Announcement';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { mobile } from '../responsive'
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const Container = styled.div`
-
+    background-color: #F4F4F6
 `;
 
 const Wrapper = styled.div`
@@ -21,10 +23,13 @@ const Wrapper = styled.div`
 const ImageContainer = styled.div`
     flex: 0.5;
     height: 100%;
+    display: flex;
+    justify-content: center;
 `;
 
 const Image = styled.img`
-    width: 100%;
+    // width: 100%;
+    height: 70vh;
 `;
 
 const InfoContainer = styled.div`
@@ -123,47 +128,59 @@ const Button = styled.button`
 
 
 const Product = () => {
+    const location = useLocation();
+    const productId = location.pathname.split('/')[2];
+    const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState(1); 
+
+    useEffect(() => {
+        const getProduct = async() => {
+            try{
+                const response = await axios.get(`http://localhost:5000/api/products/find/${productId}`);
+                setProduct(response.data);
+            }catch(err){
+
+            }
+        }
+        getProduct();
+    }, [productId]);
+
+    const modifyQuantity = (type) => {
+        if(type === 'inc') {
+            setQuantity(quantity + 1);
+        } else if(type === 'dec') {
+            quantity > 1 && setQuantity(quantity - 1)
+        }
+    }
   return (
     <Container>
         <Announcement />
         <Navbar />
         <Wrapper>
             <ImageContainer>
-                <Image src='https://cdn.aboutstatic.com/file/images/9a1924a1f5f37d7de93d5362d6a19898.png?bg=F4F4F5&quality=75&trim=1&height=1067&width=800'/>
+                <Image src={product.img}/>
             </ImageContainer>
             <InfoContainer>
-                <Title>Shirt</Title>
-                <Description>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </Description>
-                <Price>$20</Price>
+                <Title>{product.Title}</Title>
+                <Description>{product.description}</Description>
+                <Price>${product.price}</Price>
                 <FilterContainer>
                     <Filter>
                         <FilterTitle>Color</FilterTitle>
-                        <FilterColor color='black'/>
-                        <FilterColor color='lightgray'/>
-                        <FilterColor color='darkblue'/>
+                        {product.color?.map(c => <FilterColor color={c} />)}
                     </Filter>
                     <Filter>
                         <FilterTitle>Size</FilterTitle>
-                        <FilterSize>
-                            <FilterSizeOption>XS</FilterSizeOption>
-                            <FilterSizeOption>S</FilterSizeOption>
-                            <FilterSizeOption>M</FilterSizeOption>
-                            <FilterSizeOption>L</FilterSizeOption>
-                            <FilterSizeOption>XL</FilterSizeOption>
+                        <FilterSize style={{cursor: 'pointer'}}>
+                            {product.size?.map(s => <FilterSizeOption>{s}</FilterSizeOption>)}
                         </FilterSize>
                     </Filter>
                 </FilterContainer>
                 <AddContainer>
                     <AmountContainer>
-                        <AddIcon />
-                        <Amount>1</Amount>
-                        <RemoveIcon />
+                        <RemoveIcon style={{cursor: 'pointer'}} onClick={() => modifyQuantity('dec')}/>
+                        <Amount>{quantity}</Amount>
+                        <AddIcon style={{cursor: 'pointer'}} onClick={() => modifyQuantity('inc')}/>
                     </AmountContainer>
                     <Button>ADD TO CART</Button>
                 </AddContainer>
