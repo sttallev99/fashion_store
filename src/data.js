@@ -27,19 +27,19 @@ export const categories = [
         id: 1,
         img: 'https://www.realmenrealstyle.com/wp-content/uploads/2023/06/shirt-shoulders-perfect-fit.jpg',
         title: 'SHIRT STYLE!',
-        cat: 'shirt'
+        cat: 'men'
     },
     {
         id: 2,
         img: 'https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fwp-content%2Fblogs.dir%2F6%2Ffiles%2F2021%2F03%2Fhm-yrsa-daley-ward-loungewear-self-love-collaboration-poet-tank-tops-hoodies-sweatpants-price-where-to-buy-1.jpg?q=75&w=800&cbr=1&fit=max',
         title: 'LOUNGEWEAR LOVE',
-        cat: 'loungewear'
+        cat: 'woman'
     },
     {
         id: 3,
         img: 'https://i.insider.com/6262c87a3fb85b001989f286?width=1000&format=jpeg&auto=webp',
         title: 'LIGHT JACKETS',
-        cat: 'jacket'
+        cat: 'jackets'
     },
 ];
 

@@ -4,6 +4,7 @@ import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutl
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import { mobile } from '../responsive';
+import { Link } from 'react-router-dom';
 
 const Info = styled.div`
     opacity: 0;
@@ -71,9 +72,11 @@ const Product = ({item}) => {
             <Icon>
                 <AddShoppingCartOutlinedIcon style={{fontSize: '35px'}}/>
             </Icon>
-            <Icon>
-                <SearchOutlinedIcon style={{fontSize: '35px'}}/>
-            </Icon>
+            <Link to={`/product/${item._id}`}>
+                <Icon>
+                    <SearchOutlinedIcon style={{fontSize: '35px'}}/>
+                </Icon>
+            </Link>
             <Icon>
                 <FavoriteBorderOutlinedIcon style={{fontSize: '35px'}}/>
             </Icon>
