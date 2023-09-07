@@ -9,6 +9,8 @@ import Footer from '../components/Footer';
 import { mobile } from '../responsive'
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { addProduct } from '../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
     background-color: #F4F4F6
@@ -132,6 +134,9 @@ const Product = () => {
     const productId = location.pathname.split('/')[2];
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1); 
+    const [color, setColor] = useState('');
+    const [size, setSize] = useState('');
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const getProduct = async() => {
@@ -152,7 +157,13 @@ const Product = () => {
             quantity > 1 && setQuantity(quantity - 1)
         }
     }
-  return (
+
+    const handleClick = () => {
+        //UPDATE CART
+        dispatch(addProduct({ ...product, quantity, color, size }))
+    }
+
+    return (
     <Container>
         <Announcement />
         <Navbar />
@@ -167,11 +178,11 @@ const Product = () => {
                 <FilterContainer>
                     <Filter>
                         <FilterTitle>Color</FilterTitle>
-                        {product.color?.map(c => <FilterColor color={c} />)}
+                        {product.color?.map(c => <FilterColor color={c} key={c} onClick={() => setColor(c)}/>)}
                     </Filter>
                     <Filter>
                         <FilterTitle>Size</FilterTitle>
-                        <FilterSize style={{cursor: 'pointer'}}>
+                        <FilterSize style={{cursor: 'pointer'}} onChange={(e) => setSize(e.target.value)}>
                             {product.size?.map(s => <FilterSizeOption>{s}</FilterSizeOption>)}
                         </FilterSize>
                     </Filter>
@@ -182,7 +193,7 @@ const Product = () => {
                         <Amount>{quantity}</Amount>
                         <AddIcon style={{cursor: 'pointer'}} onClick={() => modifyQuantity('inc')}/>
                     </AmountContainer>
-                    <Button>ADD TO CART</Button>
+                    <Button onClick={handleClick}>ADD TO CART</Button>
                 </AddContainer>
             </InfoContainer>
         </Wrapper>
