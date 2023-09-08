@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import { Add } from '@mui/icons-material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { mobile } from '../responsive';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
 
@@ -72,7 +73,8 @@ const ProductDetails = styled.div`
 `;
 
 const Image = styled.img`
-    width: 250px;
+    // width: 250px;
+    height: 30vh;
     ${mobile({width: '200px', height: '200px', objectFit: 'cover'})}
 `;
 
@@ -169,6 +171,7 @@ const Hr = styled.hr`
 
 
 const Cart = () => {
+    const cart = useSelector(state => state.cart);
   return (
     <Container>
         <Announcement />
@@ -185,6 +188,28 @@ const Cart = () => {
             </Top>
             <Bottom>
                 <Info>
+                    {cart.products.map(p => 
+                        <Product>
+                            <ProductDetails>
+                                <Image src={p.img}/>
+                                <Details>
+                                    <ProductName><b>Product:</b> {p.title}</ProductName>
+                                    <ProductID><b>ID:</b> {p._id}</ProductID>
+                                    <ProductColor color='black'/>
+                                    <ProductSize><b>Size:</b> {p.size}</ProductSize>
+                                </Details>
+                            </ProductDetails>
+                            <PriceDetails>
+                                <ProductAmountContainer>
+                                    <Add />
+                                    <ProductAmount>{p.quantity}</ProductAmount>
+                                    <RemoveIcon />
+                                </ProductAmountContainer>
+                                <ProductPrice>${p.price*p.quantity}</ProductPrice>
+                            </PriceDetails>
+                        </Product>
+                    )}
+                    {/* <Hr /> 
                     <Product>
                         <ProductDetails>
                             <Image src='https://cdn.aboutstatic.com/file/images/fc9a259599ce61dae3b92469f1e34db0.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800'/>
@@ -203,33 +228,13 @@ const Cart = () => {
                             </ProductAmountContainer>
                             <ProductPrice>$30</ProductPrice>
                         </PriceDetails>
-                    </Product>
-                    <Hr /> 
-                    <Product>
-                        <ProductDetails>
-                            <Image src='https://cdn.aboutstatic.com/file/images/fc9a259599ce61dae3b92469f1e34db0.jpg?brightness=0.96&quality=75&trim=1&height=1067&width=800'/>
-                            <Details>
-                                <ProductName><b>Product:</b> ADIDAS BY STELLA MCCARTNEY</ProductName>
-                                <ProductID><b>ID:</b> 19956363</ProductID>
-                                <ProductColor color='black'/>
-                                <ProductSize><b>Size:</b> 37.5</ProductSize>
-                            </Details>
-                        </ProductDetails>
-                        <PriceDetails>
-                            <ProductAmountContainer>
-                                <Add />
-                                <ProductAmount>2</ProductAmount>
-                                <RemoveIcon />
-                            </ProductAmountContainer>
-                            <ProductPrice>$30</ProductPrice>
-                        </PriceDetails>
-                    </Product>
+                    </Product> */}
                 </Info>
                 <Summary>
                     <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                     <SummaryItem>
                         <SummaryItemText>Subtotal</SummaryItemText>
-                        <SummaryItemPrice>$ 80</SummaryItemPrice>
+                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
                         <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -241,7 +246,7 @@ const Cart = () => {
                     </SummaryItem>
                     <SummaryItem type='total'>
                         <SummaryItemText>Total</SummaryItemText>
-                        <SummaryItemPrice>$ 80</SummaryItemPrice>
+                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryButton>CHECKOUT NOW</SummaryButton>
                 </Summary>    
