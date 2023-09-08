@@ -8,7 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Success from "./pages/Success";
 
 function App() {
-  const user = true;
+  const user = false;
   return (
     <Routes>
       <Route path="/" element={ <Home />} />
